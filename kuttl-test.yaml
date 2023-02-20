@@ -1,0 +1,15 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestSuite
+testDirs:
+  - ./e2e/
+startKIND: false
+timeout: 150
+commands:
+  - script: |-
+      vcluster create --connect=false vcluster -n vcluster-kuttl
+      kubectl wait --for=condition=ready pod -l app=vcluster -n vcluster-kuttl --timeout=150s
+  - command:
+      vcluster connect --update-current=false --background-proxy --kube-config ./e2e/virtual vcluster
+    background: true
+  - command:
+      sleep 10

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    vcluster.loft.sh/namespace: default
+  namespace: vcluster-kuttl
+status:
+  phase: Running
